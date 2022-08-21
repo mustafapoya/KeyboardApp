@@ -18,6 +18,74 @@ varRow = 1
 varColumn = 0
 
 
+def leftKey(event):
+    if curBut == [-1, -1]:
+        curBut[:] = [0, 0]
+        buttonL[0][0].configure(highlightbackground="red")
+    elif curBut[0] == 4:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [0, 0]
+        buttonL[0][0].configure(highlightbackground="red")
+    else:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [curBut[0], (curBut[1]+1)%11]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+
+    buttonL[curBut[0]][curBut[1]].focus_set()
+
+
+def rightKey(event):
+    if curBut == [-1, -1]:
+        curBut[:] = [0, 0]
+        buttonL[0][0].configure(highlightbackground="red")
+    elif curBut[0] == 4:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [0, 10]
+        buttonL[0][10].configure(highlightbackground="red")
+    else:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [curBut[0], (curBut[1]-1)%11]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+
+    buttonL[curBut[0]][curBut[1]].focus_set()
+
+
+def upKey(event):
+    if curBut == [-1, -1]:
+        curBut[:] = [0, 0]
+        buttonL[0][0].configure(highlightbackground="red")
+    elif curBut[0] == 0:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]-1)%5, 0]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+    elif curBut[0] == 4:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]-1)%5, 5]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+    else:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]-1)%5, curBut[1]]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+
+
+def downKey(event):
+    if curBut == [-1, -1]:
+        curBut[:] = [0, 0]
+        buttonL[0][0].configure(highlightbackground="red")
+    elif curBut[0] == 3:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]+1) % 5, 0]
+        buttonL[curBut[0]][curBut[1] % 11].configure(highlightbackground="red")
+    elif curBut[0] == 4:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]+1) % 5, 5]
+        buttonL[curBut[0]][curBut[1] % 11].configure(highlightbackground="red")
+    else:
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+        curBut[:] = [(curBut[0]+1) % 5, curBut[1]]
+        buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
+
+
 def select(value, x, y):
     if curBut != [-1, -1]:
         buttonL[curBut[0]][curBut[1]].configure(highlightbackground="red")
@@ -69,5 +137,9 @@ for button in keys:
         varRow += 1
         buttonL.append([])
 
+Keyboard_App.bind("<Left>", leftKey)
+Keyboard_App.bind("<Right>", rightKey)
+Keyboard_App.bind("<Up>", upKey)
+Keyboard_App.bind("<Down>", downKey)
 
 Keyboard_App.mainloop()
